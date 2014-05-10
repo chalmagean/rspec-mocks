@@ -84,6 +84,34 @@ module RSpec
         ExampleMethods.declare_verifying_double(ObjectVerifyingDouble, ref, *args)
       end
 
+      # Constructs a test double that responds to all methods that can be used
+      # for spying with `have_received`
+      #
+      # @return (Double)
+      def spy(name=nil)
+        double(name).as_null_object
+      end
+
+      # Constructs a spy double against a specific class. It responds to all
+      # methods to which instances of that class respond. Can be used for
+      # spying with `have_received`.
+      def instance_spy(doubled_class)
+        instance_double(doubled_class).as_null_object
+      end
+
+      # Constructs a spy double against an object. It responds to all
+      # methods to which that object responds. Can be used for spying with `have_received`.
+      def object_spy(doubled_instance)
+        object_double(doubled_instance).as_null_object
+      end
+
+      # Constructs a spy double against a specific class. It responds to all
+      # class methods to which that class responds. Can be used for spying with
+      # `have_received`.
+      def class_spy(doubled_class)
+        class_double(doubled_class).as_null_object
+      end
+
       # Disables warning messages about expectations being set on nil.
       #
       # By default warning messages are issued when expectations are set on
