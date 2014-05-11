@@ -218,8 +218,9 @@ module RSpec
       end
 
       # Verifies that the given object received the expected message during the
-      # course of the test. The method must have previously been stubbed in
-      # order for messages to be verified.
+      # course of the test. On a spy objects or as null object doubles this
+      # works for any method, on other objects the method must have
+      # been stubbed beforehand in order for messages to be verified.
       #
       # Stubbing and verifying messages received in this way implements the
       # Test Spy pattern.
