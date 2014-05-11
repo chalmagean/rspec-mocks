@@ -15,4 +15,4 @@ Feature: Spy on an unstubbed method
       end
       """
     When I run `rspec failed_spy_spec.rb`
-    Then the output should contain "that method has not been stubbed"
+    Then the output should contain "that object is not a spy or method has not been stubbed"
