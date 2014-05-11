@@ -84,32 +84,71 @@ module RSpec
         ExampleMethods.declare_verifying_double(ObjectVerifyingDouble, ref, *args)
       end
 
-      # Constructs a test double that responds to all methods that can be used
-      # for spying with `have_received`
-      #
+      # @overload spy()
+      # @overload spy(name)
+      #   @param name [String/Symbol] used to clarify intent
+      # @overload spy(stubs)
+      #   @param stubs (Hash) hash of message/return-value pairs
+      # @overload spy(name, stubs)
+      #   @param name [String/Symbol] used to clarify intent
+      #   @param stubs (Hash) hash of message/return-value pairs
       # @return (Double)
-      def spy(name=nil)
-        double(name).as_null_object
+      #
+      # Constructs a test double that is optimized for use with
+      # `have_received`. With a normal double one has to stub methods in order
+      # to be able to spy them. A spy automatically spies on all methods.
+      def spy(*args)
+        double(*args).as_null_object
       end
 
-      # Constructs a spy double against a specific class. It responds to all
-      # methods to which instances of that class respond. Can be used for
-      # spying with `have_received`.
-      def instance_spy(doubled_class)
-        instance_double(doubled_class).as_null_object
+      # @overload instance_spy(doubled_class)
+      #   @param doubled_class [String, Class]
+      # @overload instance_spy(doubled_class, stubs)
+      #   @param doubled_class [String, Class]
+      #   @param stubs [Hash] hash of message/return-value pairs
+      # @return InstanceVerifyingDouble
+      #
+      # Constructs a test double that is optimized for use with `have_received`
+      # against a specific class. If the given class name has been loaded, only
+      # instance methods defined on the class are allowed to be stubbed.  With
+      # a normal double one has to stub methods in order to be able to spy
+      # them. An instance_spy automatically spies on all instance methods to
+      # which the class responds.
+      def instance_spy(doubled_class, *args)
+        instance_double(doubled_class, *args).as_null_object
       end
 
-      # Constructs a spy double against an object. It responds to all
-      # methods to which that object responds. Can be used for spying with `have_received`.
-      def object_spy(doubled_instance)
-        object_double(doubled_instance).as_null_object
+      # @overload object_spy(object_or_name)
+      #   @param object_or_name [String, Object]
+      # @overload object_spy(object_or_name, stubs)
+      #   @param object_or_name [String, Object]
+      #   @param stubs [Hash] hash of message/return-value pairs
+      # @return ObjectVerifyingDouble
+      #
+      # Constructs a test double that is optimized for use with `have_received`
+      # against a specific object. Only instance methods defined on the object
+      # are allowed to be stubbed.  With a normal double one has to stub
+      # methods in order to be able to spy them. An object_spy automatically
+      # spies on all methods to which the object responds.
+      def object_spy(doubled_instance, *args)
+        object_double(doubled_instance, *args).as_null_object
       end
 
-      # Constructs a spy double against a specific class. It responds to all
-      # class methods to which that class responds. Can be used for spying with
-      # `have_received`.
-      def class_spy(doubled_class)
-        class_double(doubled_class).as_null_object
+      # @overload class_spy(doubled_class)
+      #   @param doubled_class [String, Module]
+      # @overload class_spy(doubled_class, stubs)
+      #   @param doubled_class [String, Module]
+      #   @param stubs [Hash] hash of message/return-value pairs
+      # @return ClassVerifyingDouble
+      #
+      # Constructs a test double that is optimized for use with `have_received`
+      # against a specific class. If the given class name has been loaded,
+      # only class methods defined on the class are allowed to be stubbed.
+      # With a normal double one has to stub methods in order to be able to spy
+      # them. An class_spy automatically spies on all class methods to which the
+      # class responds.
+      def class_spy(doubled_class, *args)
+        class_double(doubled_class, *args).as_null_object
       end
 
       # Disables warning messages about expectations being set on nil.

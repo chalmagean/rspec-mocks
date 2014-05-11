@@ -13,6 +13,14 @@ describe "the spy family of methods" do
     it "records called methods" do
       expect(spy.tap { |s| s.foo }).to have_received(:foo)
     end
+
+    it "takes a hash of method names and return values" do
+      expect(spy(:foo => :bar).foo).to eq(:bar)
+    end
+
+    it "takes a name and a hash of method names and return values" do
+      expect(spy(:bacon_bits, :foo => :bar).foo).to eq(:bar)
+    end
   end
 
   shared_examples_for "a verifying spy with a foo method" do
@@ -42,6 +50,10 @@ describe "the spy family of methods" do
       subject { instance_spy(the_class) }
 
       it_behaves_like "a verifying spy with a foo method"
+
+      it "takes a class and a hash of method names and return values" do
+        expect(instance_spy(the_class, :foo => :bar).foo).to eq(:bar)
+      end
     end
 
     context "passing a class by string reference" do
@@ -56,6 +68,10 @@ describe "the spy family of methods" do
       subject { instance_spy(the_class) }
 
       it_behaves_like "a verifying spy with a foo method"
+
+      it "takes a class name string and a hash of method names and return values" do
+        expect(instance_spy(the_class, :foo => :bar).foo).to eq(:bar)
+      end
     end
   end
 
@@ -73,6 +89,10 @@ describe "the spy family of methods" do
     subject { object_spy(the_instance) }
 
     it_behaves_like "a verifying spy with a foo method"
+
+    it "takes an instance and a hash of method names and return values" do
+      expect(object_spy(the_instance, :foo => :bar).foo).to eq(:bar)
+    end
   end
 
   describe "class_spy" do
@@ -87,5 +107,9 @@ describe "the spy family of methods" do
     subject { class_spy(the_class) }
 
     it_behaves_like "a verifying spy with a foo method"
+
+    it "takes a class and a hash of method names and return values" do
+      expect(class_spy(the_class, :foo => :bar).foo).to eq(:bar)
+    end
   end
 end
