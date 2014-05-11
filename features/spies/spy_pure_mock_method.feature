@@ -17,6 +17,20 @@ Feature: Spy on a stubbed method on a pure mock
     When I run `rspec verified_spy_spec.rb`
     Then the examples should all pass
 
+  Scenario: verify a message is received using a spy
+    Given a file named "spy_message_spec.rb" with:
+      """ruby
+      describe "have_received" do
+        it "passes when the expectation is met" do
+          invitation = spy
+          invitation.deliver
+          expect(invitation).to have_received(:deliver)
+        end
+      end
+      """
+    When I run `rspec --format documentation spy_message_spec.rb`
+    Then the examples should all pass
+
   Scenario: verify a stubbed method with message expectations
     Given a file named "verified_message_expectations_spec.rb" with:
       """ruby
