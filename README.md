@@ -102,8 +102,9 @@ zipcode.valid?
 
 ## Test Spies
 
-Verifies the given object received the expected message during the course of the
-test.
+Verifies the given object received the expected message during the course of
+the test. For a message to be verified, the given object must be setup to spy
+on it, either by having it explicitly stubbed or by being defined as a `spy`.
 
 Stubbing and verifying messages received in this way implements the Test Spy
 pattern.
