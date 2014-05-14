@@ -39,13 +39,13 @@ describe "the spy family of methods" do
 
   describe "instance_spy" do
     context "when passing a class object" do
-      let(:the_class) {
+      let(:the_class) do
         Class.new do
           def foo
             3
           end
         end
-      }
+      end
 
       subject { instance_spy(the_class) }
 
@@ -76,13 +76,13 @@ describe "the spy family of methods" do
   end
 
   describe "object_spy" do
-    let(:the_class) {
+    let(:the_class) do
       Class.new do
         def foo
           3
         end
       end
-    }
+    end
 
     let(:the_instance) { the_class.new }
 
@@ -96,13 +96,13 @@ describe "the spy family of methods" do
   end
 
   describe "class_spy" do
-    let(:the_class) {
+    let(:the_class) do
       Class.new do
         def self.foo
           3
         end
       end
-    }
+    end
 
     subject { class_spy(the_class) }
 
