@@ -114,8 +114,8 @@ module RSpec
       # a normal double one has to stub methods in order to be able to spy
       # them. An instance_spy automatically spies on all instance methods to
       # which the class responds.
-      def instance_spy(doubled_class, *args)
-        instance_double(doubled_class, *args).as_null_object
+      def instance_spy(*args)
+        instance_double(*args).as_null_object
       end
 
       # @overload object_spy(object_or_name)
@@ -130,8 +130,8 @@ module RSpec
       # are allowed to be stubbed.  With a normal double one has to stub
       # methods in order to be able to spy them. An object_spy automatically
       # spies on all methods to which the object responds.
-      def object_spy(doubled_instance, *args)
-        object_double(doubled_instance, *args).as_null_object
+      def object_spy(*args)
+        object_double(*args).as_null_object
       end
 
       # @overload class_spy(doubled_class)
@@ -147,8 +147,8 @@ module RSpec
       # With a normal double one has to stub methods in order to be able to spy
       # them. An class_spy automatically spies on all class methods to which the
       # class responds.
-      def class_spy(doubled_class, *args)
-        class_double(doubled_class, *args).as_null_object
+      def class_spy(*args)
+        class_double(*args).as_null_object
       end
 
       # Disables warning messages about expectations being set on nil.
